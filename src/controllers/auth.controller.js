@@ -3,6 +3,8 @@ const {getUsers,getUserByEmail,getUserById,
     getUserByPhone
     ,updateUserByEmail,deleteUserByEmail,deleteUserById,
     createUser,getUserBySessionToken,getUserByEmailSecure} = require('../db/users');
+const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail')
 const randomstring = require('randomstring')
 require('dotenv').config();
 
@@ -21,7 +23,8 @@ const register = async (req,res)=>{
             username:username,
             email:email,
             phone:phone,
-            password:password
+            password:password,
+            role:role?role:"viewer"
         })
         return res.status(201).json({success:true,message:"User created successfully",data:newUser});
     } catch (error) {
