@@ -3,8 +3,7 @@ const {getUsers,getUserByEmail,getUserById,
     getUserByPhone
     ,updateUserByEmail,deleteUserByEmail,deleteUserById,
     createUser,getUserBySessionToken,getUserByEmailSecure} = require('../db/users');
-const nodemailer = require('nodemailer');
-const sgMail = require('@sendgrid/mail')
+
 const randomstring = require('randomstring')
 require('dotenv').config();
 
