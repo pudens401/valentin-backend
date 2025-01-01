@@ -28,5 +28,6 @@ module.exports = {
     getAll,
     getById,
     deleteById,
-    updateById
+    updateById,
+    getByProject
 };

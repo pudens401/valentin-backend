@@ -1,4 +1,5 @@
 const projectDb = require('../db/Project')
+const commentDb = require('../db/Comment')
 const {cloudinary} = require('../utils/cloudinary.config')
 
 
@@ -44,9 +45,9 @@ const createNewProject = async (req, res) => {
         images
     });
 
-    return res.status(201).json({ success: true, message: 'Project added successfully', project: newProject });
+    return res.status(201).json({ success: true, message: 'Project added successfully', data: newProject });
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    return res.status(400).json({ success: false, message: error.message });
   }
 };
 
@@ -135,10 +136,14 @@ const deleteProject = async (req, res) => {
             });
         }
 
+        deletedProject.comments.map(async (comment) => {
+            await commentDb.deleteById(comment)
+        })
+
         // Respond with success
         return res.status(200).json({ success: true, message: "Project and associated images deleted successfully" });
     } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
+        return res.status(400).json({ success: false, message: error.message });
     }
 };
 
