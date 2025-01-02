@@ -10,6 +10,7 @@ const createNewMessage = async (req, res) => {
       email,
       phone
     } = req.body;
+    console.log(req.body);
 
     if (!name || !body || !email || !phone) {
       return res.status(400).json({ success: false, message: 'Required fields missing values' });
