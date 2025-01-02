@@ -7,4 +7,5 @@ module.exports = (router) => {
     router.get('/api/messages/:id',messageControllers.getOneMessage);
     router.delete('/api/messages/:id',messageControllers.deleteMessage);
     router.patch('/api/messages/:id',messageControllers.updateMessage)
+    router.patch('/api/messages/read/:id',messageControllers.toggleRead)
 }

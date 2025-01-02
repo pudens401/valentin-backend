@@ -80,6 +80,20 @@ const updateMessage = async (req,res) =>{
     }
 }
 
+const toggleRead = async (req,res) => {
+    try {
+        const {id} = req.params;
+        const retrievedMessage = await messageDb.getById(id);
+        if(!retrievedMessage) return res.status(404).json({success:false,message:'message not found'})
+        retrievedMessage.isRead = !retrievedMessage.isRead;
+        await retrievedMessage.save();
+        return res.status(202).json({success:true,isRead:retrievedMessage.isRead,message:`message read set to ${retrievedMessage.isRead?'Read':'Unread'}`});
+
+    } catch (error) {
+        return res.status(400).json({success:false,message:error.message})
+    }
+}
+
 
 
 const deleteMessage = async (req, res) => {
@@ -96,7 +110,7 @@ const deleteMessage = async (req, res) => {
         }
 
         // Respond with success
-        return res.status(200).json({ success: true, message: "message deleted successfully" });
+        return res.status(200).json({ success: true, data:deletedMessage, message: "message deleted successfully" });
     } catch (error) {
         return res.status(400).json({ success: false, message: error.message });
     }
@@ -108,5 +122,6 @@ module.exports = {
     getAllMessages,
     getOneMessage,
     updateMessage,
+    toggleRead,
     deleteMessage
 }
