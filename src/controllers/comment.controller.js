@@ -10,7 +10,6 @@ const createNewComment = async (req, res) => {
       body,
       projectId
     } = req.body;
-    console.log(req.body)
 
     if (!name || !body || !projectId) {
       return res.status(400).json({ success: false, message: 'Required fields missing values' });
