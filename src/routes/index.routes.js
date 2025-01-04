@@ -6,6 +6,7 @@ const authRoutes = require('./auth.routes')
 const projectRoutes = require('./project.routes');
 const commentRoutes = require('./comment.routes');
 const messageRoutes = require('./message.routes') 
+const miscRoutes = require('./misc.routes')
 
 
 module.exports = ()=>{
@@ -14,5 +15,6 @@ module.exports = ()=>{
     projectRoutes(router);
     commentRoutes(router);
     messageRoutes(router);
+    miscRoutes(router);
     return router;
 }

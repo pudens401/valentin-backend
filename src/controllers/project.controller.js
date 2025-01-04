@@ -94,7 +94,7 @@ const updateProject = async (req,res) =>{
             ...(description&&{description})
         })
         if(!updatedProject) return res.status(404).json({success:false,message:`Project with id: ${id} not found`});
-        return res.status(202).json({success:true,message:`Project with id: ${updatedProject._id.toString()} updated successfully`,data:updatedProject});
+        return res.status(202).json({success:true,message:`Project updated successfully`,data:updatedProject});
     } catch (error) {
         return res.status(400).json({success:false,message:error.message});
     }
